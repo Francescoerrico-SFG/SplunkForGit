@@ -17,7 +17,6 @@ services:
       - "8089:8089"   
     volumes:
       - splunk_indexer_var:/opt/splunk/var
-      - ./configs/idx/local:/opt/splunk/etc/system/local
     networks:
       - splunk-net
 
