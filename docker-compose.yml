@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  splunk-indexer:
+    build:
+      context: .
+    hostname: idx
+    image: splunk/splunk:latest
+    container_name: splunk-indexer
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=Splunk@00
+      - SPLUNK_ROLE=splunk_indexer
+    ports:
+      - "8088:8088"   
+      - "9997:9997"   
+      - "8089:8089"   
+    volumes:
+      - splunk_indexer_var:/opt/splunk/var
+      - ./configs/idx/local:/opt/splunk/etc/system/local
+    networks:
+      - splunk-net
+
+  splunk-heavyforwarder:
+    build:
+      context: .
+    hostname: hf
+    image: splunk/splunk:latest
+    container_name: splunk-heavyforwarder
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=Splunk@00
+      - SPLUNK_ROLE=splunk_heavy_forwarder
+    ports:
+      - "9998:9998"
+    volumes:
+      - splunk_hf_var:/opt/splunk/var
+      - ./configs/hf/local:/opt/splunk/etc/system/local
+    depends_on:
+      - splunk-indexer
+    networks:
+      - splunk-net
+
+  splunk-searchhead:
+    build:
+      context: .
+    hostname: sh
+    image: splunk/splunk:latest
+    container_name: splunk-searchhead
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=Splunk@00
+      - SPLUNK_ROLE=splunk_search_head
+    ports:
+      - "8000:8000"  
+    volumes:
+      - splunk_sh_var:/opt/splunk/var
+      - ./configs/sh/local:/opt/splunk/etc/system/local
+    depends_on:
+      - splunk-indexer
+    networks:
+      - splunk-net
+
+networks:
+  splunk-net:
+    driver: bridge
+
+volumes:
+  splunk_indexer_var:
+  splunk_hf_var:
+  splunk_sh_var:
