@@ -14,19 +14,14 @@ Questo progetto esegue un'istanza **Splunk distribuita** in ambiente Docker, con
 ```
 .
 ├── docker-compose.yml
-├── Dockerfile                  # (opzionale) per installazioni extra, es. git
+├── Dockerfile                  # per installazioni extra, es. git
 ├── configs/
-│   ├── indexer/
-│   │   └── local/
-│   │       ├── server.conf
-│   │       ├── inputs.conf
 │   ├── heavyforwarder/
 │   │   └── local/
 │   │       └── outputs.conf
 │   └── searchhead/
 │       └── local/
 │           ├── distsearch.conf
-│           └── server.conf
 ```
 
 ## 🚀 Come avviare l’ambiente
