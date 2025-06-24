@@ -1,0 +1,39 @@
+# File temporanei
+*.spl
+*.tgz
+*.out
+*.swp
+*.bak
+*.lock
+*.tmp
+*.pyc
+*.pyo
+.DS_Store
+ 
+# Cartelle di cache/log
+*.log
+*.pid
+ 
+# Cartelle runtime di Splunk
+/var/
+/local/
+/lookups/
+/metadata/local.meta
+ 
+# Ignora configurazioni locali (non replicabili o specifiche di nodo)
+/apps/*/local/
+/apps/*/metadata/local.meta
+/apps/*/lookups/*.csv
+/apps/*/lookups/*.lookup
+ 
+# Deployment server status
+/etc/.deploymentclient
+/etc/system/local/deploymentclient.conf
+ 
+# Saved credentials, tokens, ecc.
+passwd
+.secret
+*.key
+*.pem
+*.crt
+*.cert

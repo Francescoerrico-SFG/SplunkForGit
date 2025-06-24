@@ -15,6 +15,7 @@ services:
       - "8088:8088"   
       - "9997:9997"   
       - "8089:8089"   
+      - "2221:22"
     volumes:
       - splunk_indexer_var:/opt/splunk/var
     networks:
@@ -32,6 +33,7 @@ services:
       - SPLUNK_ROLE=splunk_heavy_forwarder
     ports:
       - "9998:9998"
+      - "2222:22"
     volumes:
       - splunk_hf_var:/opt/splunk/var
       - ./configs/hf/local:/opt/splunk/etc/system/local
@@ -52,6 +54,7 @@ services:
       - SPLUNK_ROLE=splunk_search_head
     ports:
       - "8000:8000"  
+      - "2223:22"
     volumes:
       - splunk_sh_var:/opt/splunk/var
       - ./configs/sh/local:/opt/splunk/etc/system/local
