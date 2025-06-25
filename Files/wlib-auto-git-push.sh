@@ -1,4 +1,4 @@
-#!/bin/bash libreria apposita
+#!/bin/bash
 
 WATCH_DIR="/opt/splunk"  # o qualsiasi dir vuoi monitorare
 
@@ -8,5 +8,5 @@ inotifywait -mrq -e modify,create,delete,move . |
 while read path action file; do
     git add -A
     git commit -m "Auto-commit: $action $file"
-    git push origin master
+    git push 
 done
